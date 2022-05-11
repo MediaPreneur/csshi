@@ -37,13 +37,13 @@ debugging = False
 
 def error(message):
     """Squeak and keel over"""
-    sys.stderr.write("ERROR: " + message + "\n")
+    sys.stderr.write(f"ERROR: {message}" + "\n")
     sys.exit(1)
 
 def debug(message):
     """Tell me more"""
     if debugging:
-        sys.stderr.write("DEBUG: " + message + "\n")
+        sys.stderr.write(f"DEBUG: {message}" + "\n")
 
 
 def get_args():
@@ -264,7 +264,7 @@ async def main(connection):
     # Launch the rest of the first row into ssh
     # First row will always be all ssh panes, no spacers
     column_heads = [tab.current_session]
-    for i in range(cols - 1):
+    for _ in range(cols - 1):
         host_ind += 1
         ssh_profile.set_command(
             ssh_exec_string.format(ssh_string=ssh_strings[host_ind])
@@ -281,7 +281,7 @@ async def main(connection):
     total_sessions = cols
     active_sessions = column_heads
     column_tails = column_heads.copy()  # new pane rows are split from the bottom
-    for i in range(rows - 1):
+    for _ in range(rows - 1):
         for j in range(cols):
             total_sessions += 1
             if total_sessions <= len(ssh_strings):
